@@ -1,0 +1,39 @@
+<html>
+<body>
+
+    <table>
+        <tr>
+            <td>Nombre</td>
+            <td th:text="${materiaHtml.nombre}">Un nombre de materia</td>
+        </tr>
+        <tr>
+            <td>Codigo</td>
+            <td th:text="${materiaHtml.codigo}">Un codigo de materia</td>
+        </tr>
+        <tr>
+            <td>Correlativas: </td>
+            <td>
+                <div th:if="${#lists.isEmpty(materiaHtml.materiasRequeridas)}">
+                    <span>No tiene correlativas</span>
+                </div>
+                <div th:each="unaMateria: ${materiaHtml.materiasRequeridas}">
+                    <span th:text="${unaMateria.nombre}">0ranges </span>
+                    <span th:text="${unaMateria.codigo}">0ranges </span>
+                </div>
+            </td>
+        </tr>
+
+    </table>
+
+    <br>
+    <h2>Actualizar datos de la materia</h2>
+    <form th:action="'/materia/'+${#strings.toString(materiaHtml.id)}+'/update'" method="get">
+       Codigo:  <input type="text" name="codigo" th:value="${materiaHtml.codigo}" /> <br>
+       Nombre:  <input type="text" name="nombre" th:value="${materiaHtml.nombre}" /> <br>
+                <input type="submit" value="actualizar"  />
+    </form>
+
+    <a href="/materias">home</a>
+</body>
+
+</html>

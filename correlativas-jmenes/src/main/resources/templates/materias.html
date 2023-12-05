@@ -1,0 +1,40 @@
+<html>
+<body>
+    <h2>Agregar materia</h2>
+    <form method="POST" action="/materia">
+        Nombre: <input type="text" name="nombre"> <br>
+        Codigo: <input type="text" name="codigo"> <br>
+
+        <input type="submit">
+    </form>
+
+    <h2>Todas las materias</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Codigo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="unaMateria: ${materiasHtml}">
+                <td th:text="${unaMateria.nombre}">0ranges </td>
+                <td th:text="${unaMateria.codigo}">0.99 </td>
+
+                <td><form th:action="'/materia/'+${#strings.toString(unaMateria.id)}" method="get">
+                    <input type="submit" value="ver materia"  />
+                </form></td>
+
+                <td><form th:action="@{materia/delete}" method="post">
+                    <input type="hidden" name="codigo" th:value="${unaMateria.codigo}" />
+                    <input type="hidden" name="nombre" th:value="${unaMateria.nombre}" />
+                    <input type="submit" value="eliminar"  />
+                </form></td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+
+
+</html>
